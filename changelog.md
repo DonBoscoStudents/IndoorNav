@@ -1,2 +1,2 @@
 - created files | [@rhysjosmin](https://github.com/Rhysjosmin) | 1:21 | 5 May 2023
--  - Added A readme for new commers,and a changelog for traking all commits
+-  - Added A readme for newcomers,and a changelog for traking all commits
