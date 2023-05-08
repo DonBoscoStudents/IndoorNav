@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Indoor Navigation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Indoor Navigation</h1>
+    </header>
+    <main>
+        <h1>Welcome to My Web App</h1>
+        <p>To get started, please allow access to your camera:</p>
+        <button onclick="startCamera()">Start Camera</button>
+        <button onclick="stopCamera()">Stop Camera</button>
+        <video id="videoElement"></video>
+        <script>
+            let stream;
+            function startCamera() {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(s => {
+                        stream = s;
+                        const videoElement = document.getElementById("videoElement");
+                        videoElement.srcObject = stream;
+                        videoElement.play();
+                    })
+                    .catch(error => {
+                        console.error("Error accessing camera:", error);
+                    });
+            }
+            function stopCamera() {
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                    const videoElement = document.getElementById("videoElement");
+                    videoElement.srcObject = null;
+                }
+            }
+        </script>
+
+        <section id="camera-section">
+            <h2>Camera Feed</h2>
+            <video id="camera-feed"></video>
+        </section>
+        <section id="instructions-section">
+            <h2>Instructions</h2>
+            <p>Please position your device so that the camera can detect AprilTags in your environment. Once the tags
+                are detected, the navigation instructions will appear here.</p>
+        </section>
+        <section id="map-section">
+            <h2>Map</h2>
+            <img src="img/map.jpg" alt="Map of the indoor space">
+        </section>
+        <section id="navigation-controls-section">
+            <h2>Navigation Controls</h2>
+            <button id="start-navigation-button">Start Navigation</button>
+            <button id="stop-navigation-button">Stop Navigation</button>
+        </section>
+    </main>
+    <footer>
+        <p>Indoor Navigation &copy; 2023</p>
+    </footer>
+    <script src="app.js"></script>
+</body>
+
+</html>
